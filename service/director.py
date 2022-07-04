@@ -11,12 +11,14 @@ class DirectorService:
     def get_all(self):
         return self.dao.get_all()
 
-    def create(self, director_d):
-        return self.dao.create(director_d)
+    def create(self, director_data):
+        return self.dao.create(director_data)
 
-    def update(self, director_d):
-        self.dao.update(director_d)
-        return self.dao
+    def update(self, director_data):
+        director = self.get_one(director_data.get("id"))
+        director.name = director_data.get("name")
+        self.dao.update(director)
+        return director
 
     def delete(self, rid):
         self.dao.delete(rid)

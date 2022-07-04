@@ -14,8 +14,10 @@ class GenreService:
     def create(self, genre_d):
         return self.dao.create(genre_d)
 
-    def update(self, genre_d):
-        self.dao.update(genre_d)
+    def update(self, genre_data):
+        genre = self.get_one(genre_data.get("id"))
+        genre.name = genre_data.get("name")
+        self.dao.update(genre)
         return self.dao
 
     def delete(self, rid):
